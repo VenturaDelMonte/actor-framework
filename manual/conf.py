@@ -22,6 +22,8 @@
 
 import os, sys, git, re
 
+# -- CAF-specific variables ---------------------------------------------------
+
 # Fetch the CAF version.
 import re
 with open("../libcaf_core/caf/config.hpp") as f:
@@ -48,7 +50,12 @@ else:
     last_commit = last_commit_full[:7]
     release = version + "+exp.sha." + last_commit
 
-# -- General configuration ------------------------------------------------
+# -- Enable Sphinx to find the literal includes -------------------------------
+
+for dirname in ["examples", "libcaf_core", "libcaf_io", "libcaf_openssl"]:
+    os.symlink("../" + dirname, "./" + dirname)
+
+# -- General configuration ----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
@@ -75,7 +82,7 @@ source_suffix = '.rst'
 # source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'manual'
+master_doc = 'index'
 
 # General information about the project.
 project = u'CAF'
